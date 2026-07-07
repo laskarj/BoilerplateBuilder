@@ -45,7 +45,7 @@ dev = [
     "ty==0.0.56",
     "prek==0.4.8",
     "complexipy==6.0.1",
-    "httpx==0.28.1",
+    "httpx2==2.5.0",
     "polyfactory==3.3.0",
     "pytest==9.1.1",
     "pytest-asyncio==1.4.0",

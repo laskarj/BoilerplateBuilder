@@ -2,7 +2,8 @@
 from typing import Any, cast
 
 from botocore.exceptions import ClientError
-from httpx import AsyncClient, Request, Response
+from httpx import Request, Response  # openai SDK exceptions expect its own httpx (v1) types
+from httpx2 import AsyncClient
 from openai import APIConnectionError, RateLimitError
 from pydantic_ai import Agent
 import pytest

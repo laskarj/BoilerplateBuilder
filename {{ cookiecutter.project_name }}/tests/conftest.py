@@ -17,7 +17,7 @@ from typing import AsyncIterable, Generator
 from alembic.command import downgrade, upgrade
 {%- endif %}
 from fastapi import FastAPI
-from httpx import ASGITransport, AsyncClient
+from httpx2 import ASGITransport, AsyncClient
 {%- if cookiecutter.project_type in ["fastapi_agent", "fastapi_db_agent"] %}
 from pydantic_ai import Agent, models as pydantic_ai_models
 {%- endif %}

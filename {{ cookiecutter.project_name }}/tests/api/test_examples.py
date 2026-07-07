@@ -2,7 +2,7 @@
 from datetime import date, datetime, timedelta, UTC
 
 from fastapi_pagination import Page
-from httpx import AsyncClient
+from httpx2 import AsyncClient
 from pydantic import TypeAdapter
 from sqlalchemy.ext.asyncio import AsyncSession
 

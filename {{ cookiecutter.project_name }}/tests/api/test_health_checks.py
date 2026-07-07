@@ -11,13 +11,13 @@ from unittest.mock import AsyncMock
 
 from fastapi import FastAPI
 from freezegun import freeze_time
-from httpx import AsyncClient
+from httpx2 import AsyncClient
 {%- if cookiecutter.project_type in ["fastapi_db", "fastapi_db_agent"] %}
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 {%- endif %}
 
-from app.modules.health_checks.schemas import (
+from app.domains.health_checks.schemas import (
     HealthCheckLiveResponse,
     HealthCheckReadyDependencies,
     HealthCheckReadyResponse,

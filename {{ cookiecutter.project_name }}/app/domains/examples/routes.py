@@ -4,14 +4,14 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Response
 from fastapi_pagination import Page, Params
 
-from app.modules.examples.schemas import (
+from app.domains.examples.schemas import (
     Example,
     ExampleCreate,
     ExampleListFilters,
     ExampleListSorting,
     ExampleUpdate,
 )
-from app.modules.examples.service import ExampleService
+from app.domains.examples.service import ExampleService
 
 router = APIRouter(tags=['Examples'])
 

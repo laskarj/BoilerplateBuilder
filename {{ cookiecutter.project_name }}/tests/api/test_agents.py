@@ -2,13 +2,14 @@
 from typing import Any, cast
 
 from botocore.exceptions import ClientError
-from httpx import AsyncClient, Request, Response
+from httpx import Request, Response  # openai SDK exceptions expect its own httpx (v1) types
+from httpx2 import AsyncClient
 from openai import APIConnectionError, RateLimitError
 from pydantic_ai import Agent
 import pytest
 
 from app.core.enums import AIModelName
-from app.modules.examples_agent.schemas import ExampleAgentDeps, ExampleAgentResponse
+from app.domains.examples_agent.schemas import ExampleAgentDeps, ExampleAgentResponse
 from tests.mocks.agent_mocks import build_mock_model, build_raising_model
 
 

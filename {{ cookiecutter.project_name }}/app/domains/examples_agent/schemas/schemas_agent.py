@@ -4,8 +4,8 @@ from dataclasses import dataclass
 
 from pydantic import BaseModel, Field
 
-from app.modules.examples.schemas import ExampleListFilters
-from app.modules.examples.service import ExampleService
+from app.domains.examples.schemas import ExampleListFilters
+from app.domains.examples.service import ExampleService
 {%- endif %}
 
 

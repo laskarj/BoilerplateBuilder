@@ -2,7 +2,7 @@
 from polyfactory.factories.pydantic_factory import ModelFactory
 from polyfactory.fields import Use
 
-from app.modules.examples.schemas import ExampleCreate
+from app.domains.examples.schemas import ExampleCreate
 
 
 class ExampleCreateFactory(ModelFactory[ExampleCreate]):

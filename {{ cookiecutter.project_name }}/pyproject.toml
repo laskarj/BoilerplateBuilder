@@ -57,6 +57,15 @@ dev = [
 {%- endif %}
 ]
 
+[tool.uv]
+# Guarantee the lock is installable on Docker/CI platforms even when a dependency
+# publishes a release with an incomplete wheel set (resolver falls back to an older version).
+required-environments = [
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",
+    "sys_platform == 'linux' and platform_machine == 'aarch64'",
+    "sys_platform == 'darwin' and platform_machine == 'arm64'",
+]
+
 [build-system]
 requires = ["hatchling==1.30.1"]
 build-backend = "hatchling.build"

@@ -1,11 +1,11 @@
 from fastapi import APIRouter
 
-from app.modules.health_checks.routes import router as health_checks_router
+from app.domains.health_checks.routes import router as health_checks_router
 {%- if cookiecutter.project_type in ["fastapi_db", "fastapi_db_agent"] %}
-from app.modules.examples.routes import router as examples_router
+from app.domains.examples.routes import router as examples_router
 {%- endif %}
 {%- if cookiecutter.project_type in ["fastapi_agent", "fastapi_db_agent"] %}
-from app.modules.examples_agent.routes import router as examples_agent_router
+from app.domains.examples_agent.routes import router as examples_agent_router
 {%- endif %}
 
 

@@ -12,13 +12,13 @@ from openai import AsyncOpenAI
 from sqlalchemy.ext.asyncio import AsyncSession
 {%- endif %}
 
-from app.modules.health_checks.schemas import (
+from app.domains.health_checks.schemas import (
     HealthCheckLiveResponse,
     HealthCheckReadyDependencies,
     HealthCheckReadyResponse,
 )
 {%- if cookiecutter.project_type != "fastapi_slim" %}
-from app.modules.health_checks.service import (
+from app.domains.health_checks.service import (
 {%- if cookiecutter.project_type in ["fastapi_agent", "fastapi_db_agent"] %}
     check_bedrock_status,
     check_openai_status,

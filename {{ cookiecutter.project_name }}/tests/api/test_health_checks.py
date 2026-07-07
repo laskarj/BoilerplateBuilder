@@ -17,7 +17,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 {%- endif %}
 
-from app.modules.health_checks.schemas import (
+from app.domains.health_checks.schemas import (
     HealthCheckLiveResponse,
     HealthCheckReadyDependencies,
     HealthCheckReadyResponse,

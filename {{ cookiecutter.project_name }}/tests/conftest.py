@@ -28,8 +28,8 @@ from testcontainers.postgres import PostgresContainer
 {%- endif %}
 {%- if cookiecutter.project_type in ["fastapi_agent", "fastapi_db_agent"] %}
 
-from app.modules.examples_agent.agents import build_examples_agent, get_examples_agent
-from app.modules.examples_agent.schemas import ExampleAgentDeps, ExampleAgentResponse
+from app.domains.examples_agent.agents import build_examples_agent, get_examples_agent
+from app.domains.examples_agent.schemas import ExampleAgentDeps, ExampleAgentResponse
 {%- endif %}
 from app.core.config import get_settings
 {%- if cookiecutter.project_type in ["fastapi_agent", "fastapi_db_agent"] %}

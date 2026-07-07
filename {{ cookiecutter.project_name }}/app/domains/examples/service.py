@@ -13,7 +13,7 @@ from app.core.exceptions import AlreadyExistError, NotFoundError
 from app.infrastructure.db.database import get_session
 from app.infrastructure.db.filters import apply_contains_filter
 from app.infrastructure.db.models.example import ExampleModel
-from app.modules.examples.schemas import (
+from app.domains.examples.schemas import (
     Example,
     ExampleCreate,
     ExampleListFilters,

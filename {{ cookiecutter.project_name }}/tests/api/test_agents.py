@@ -8,7 +8,7 @@ from pydantic_ai import Agent
 import pytest
 
 from app.core.enums import AIModelName
-from app.modules.examples_agent.schemas import ExampleAgentDeps, ExampleAgentResponse
+from app.domains.examples_agent.schemas import ExampleAgentDeps, ExampleAgentResponse
 from tests.mocks.agent_mocks import build_mock_model, build_raising_model
 
 

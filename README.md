@@ -51,14 +51,14 @@ All types share: Python 3.11–3.13, uv, Ruff + ty, pytest, Docker, Makefile, pr
 your-project/
 ├── app/
 │   ├── main.py
-│   ├── router.py                      # Aggregates module routers (create_router)
+│   ├── router.py                      # Aggregates domain routers (create_router)
 │   ├── core/                          # Config, logging, observability, exceptions, schemas
 │   ├── infrastructure/                # Technical adapters
 │   │   ├── db/
 │   │   │   └── models/                # All SQLAlchemy models (db types)
 │   │   └── llms/                      # LLM provider config (agent types)
-│   └── modules/                       # Business logic, one vertical slice per feature
-│       ├── README.md                  # Module conventions
+│   └── domains/                       # Business logic, one vertical slice per feature
+│       ├── README.md                  # Domain conventions
 │       ├── health_checks/             # Liveness & readiness probes (routes + schemas + service)
 │       ├── examples/                  # Example CRUD feature (db types)
 │       └── examples_agent/            # Example AI agent feature (agent types)

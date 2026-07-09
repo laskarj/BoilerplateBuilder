@@ -48,7 +48,7 @@ def setup(app: FastAPI, settings: Settings) -> None:
 
     sampler = TraceIdRatioBased(settings.OBSERVABILITY_TRACING_SAMPLE_RATE_PERCENT / 100)
     provider = TracerProvider(resource=create_resource(settings=settings), sampler=sampler)
-    span_exporter = OTLPSpanExporter(endpoint=endpoint.encoded_string(), insecure=endpoint.scheme != 'https')
+    span_exporter = OTLPSpanExporter(endpoint=endpoint.encoded_string(), insecure=endpoint.scheme not in ('https', 'grpcs'))
     span_processor = BatchSpanProcessor(span_exporter=span_exporter)
     provider.add_span_processor(span_processor=span_processor)
     trace.set_tracer_provider(tracer_provider=provider)

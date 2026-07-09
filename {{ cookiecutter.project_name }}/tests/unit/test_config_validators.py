@@ -21,10 +21,18 @@ def build_settings(**overrides: Unpack[SettingsOverrides]) -> Settings:
     return Settings.model_validate(data)
 
 
-def test_rejects_non_http_tracing_endpoint() -> None:
-    """Settings reject OTLP endpoints that cannot be used by the HTTP URL type."""
+def test_accepts_grpc_tracing_endpoint() -> None:
+    """Settings accept grpc:// endpoints for OTLP export over gRPC."""
+    settings = build_settings(OBSERVABILITY_TRACING_OTLP_ENDPOINT='grpc://host:4317')
+
+    assert settings.OBSERVABILITY_TRACING_OTLP_ENDPOINT is not None
+    assert settings.OBSERVABILITY_TRACING_OTLP_ENDPOINT.scheme == 'grpc'
+
+
+def test_rejects_unsupported_scheme_tracing_endpoint() -> None:
+    """Settings reject OTLP endpoints whose scheme no exporter transport can use."""
     with pytest.raises(ValueError):
-        build_settings(OBSERVABILITY_TRACING_OTLP_ENDPOINT='grpc://host:4317')
+        build_settings(OBSERVABILITY_TRACING_OTLP_ENDPOINT='ftp://host:4317')
 
 
 def test_tracing_endpoint_can_be_missing_when_tracing_is_disabled() -> None:

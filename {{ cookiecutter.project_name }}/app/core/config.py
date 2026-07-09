@@ -1,11 +1,11 @@
 from functools import lru_cache
 {% set is_agent = cookiecutter.project_type in ["fastapi_agent", "fastapi_db_agent"] -%}
 {% if is_agent and cookiecutter.use_otel_observability == "yes" -%}
-from typing import Literal, Self
+from typing import Annotated, Literal, Self
 {% elif is_agent -%}
 from typing import Literal
 {% elif cookiecutter.use_otel_observability == "yes" -%}
-from typing import Self
+from typing import Annotated, Self
 {% endif -%}
 {%- if cookiecutter.project_type in ["fastapi_db", "fastapi_db_agent"] %}
 
@@ -17,13 +17,19 @@ from pydantic import SecretStr
 {%- endif %}
 {%- if cookiecutter.use_otel_observability == "yes" %}
 
-from pydantic import AnyHttpUrl, Field, model_validator
+from pydantic import AnyUrl, Field, UrlConstraints, model_validator
 {%- endif %}
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from app.core.logging import LogFormatType, LogLevel
 
+{% if cookiecutter.use_otel_observability == "yes" -%}
+# OTLP collectors may be reached over gRPC (grpc://, grpcs://) as well as HTTP; the exporter strips the
+# scheme to host:port and derives TLS from it, so allow all four rather than only http/https.
+OtlpEndpoint = Annotated[AnyUrl, UrlConstraints(allowed_schemes=['http', 'https', 'grpc', 'grpcs'], host_required=True)]
 
+
+{% endif -%}
 class Settings(BaseSettings):
     PROJECT_NAME: str = '{{ cookiecutter.project_name }}'
     PROJECT_VERSION: str = '0.1.0'
@@ -68,7 +74,7 @@ class Settings(BaseSettings):
     OBSERVABILITY_TRACING_ENABLED: bool = False
     OBSERVABILITY_METRICS_ENABLED: bool = False
     OBSERVABILITY_TRACING_SAMPLE_RATE_PERCENT: float = Field(default=100.0, ge=0.0, le=100.0)
-    OBSERVABILITY_TRACING_OTLP_ENDPOINT: AnyHttpUrl | None = None
+    OBSERVABILITY_TRACING_OTLP_ENDPOINT: OtlpEndpoint | None = None
 
     @model_validator(mode='after')
     def validate_observability_tracing_config(self) -> Self:

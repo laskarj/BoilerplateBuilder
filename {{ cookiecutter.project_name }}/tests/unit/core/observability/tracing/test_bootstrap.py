@@ -98,6 +98,20 @@ def test_setup_uses_insecure_exporter_for_http_endpoint(monkeypatch: MonkeyPatch
     assert spy.span_exporter == SpanExporterSpy(endpoint='http://collector.internal:4317/', insecure=True)
 
 
+def test_setup_uses_insecure_exporter_for_grpc_endpoint(monkeypatch: MonkeyPatch) -> None:
+    """Tracing setup allows insecure OTLP export for plaintext gRPC endpoints."""
+    spy = setup_tracing(monkeypatch, OBSERVABILITY_TRACING_OTLP_ENDPOINT='grpc://collector.internal:4317')
+
+    assert spy.span_exporter == SpanExporterSpy(endpoint='grpc://collector.internal:4317', insecure=True)
+
+
+def test_setup_uses_secure_exporter_for_grpcs_endpoint(monkeypatch: MonkeyPatch) -> None:
+    """Tracing setup keeps the OTLP exporter secure for TLS gRPC endpoints."""
+    spy = setup_tracing(monkeypatch, OBSERVABILITY_TRACING_OTLP_ENDPOINT='grpcs://collector.internal:4317')
+
+    assert spy.span_exporter == SpanExporterSpy(endpoint='grpcs://collector.internal:4317', insecure=False)
+
+
 def test_setup_attaches_span_processor_to_provider(monkeypatch: MonkeyPatch) -> None:
     """Tracing setup connects the OTLP exporter pipeline to the tracer provider."""
     spy = setup_tracing(monkeypatch)

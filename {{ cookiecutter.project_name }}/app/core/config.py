@@ -24,8 +24,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from app.core.logging import LogFormatType, LogLevel
 
 {% if cookiecutter.use_otel_observability == "yes" -%}
-# OTLP collectors may be reached over gRPC (grpc://, grpcs://) as well as HTTP; the exporter strips the
-# scheme to host:port and derives TLS from it, so allow all four rather than only http/https.
 OtlpEndpoint = Annotated[AnyUrl, UrlConstraints(allowed_schemes=['http', 'https', 'grpc', 'grpcs'], host_required=True)]
 
 

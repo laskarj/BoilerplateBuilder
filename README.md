@@ -41,7 +41,7 @@ All types share: Python 3.11–3.13, uv, Ruff + ty, pytest, Docker, Makefile, pr
 - Agent test mocks for deterministic testing
 
 **Observability** (optional, any type):
-- OpenTelemetry tracing, Prometheus metrics, and flat structured JSON logging
+- OpenTelemetry tracing, Prometheus metrics, structured JSON logging
 - Custom metric decorators (`@track_inflight`, `@increment_after`, `@increment_on_error`, `@track_latency`)
 - Local dev stack: Grafana, Tempo, Prometheus, Loki, OTEL Collector, Grafana Alloy
 

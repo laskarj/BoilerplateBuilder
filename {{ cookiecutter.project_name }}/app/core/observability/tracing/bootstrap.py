@@ -56,5 +56,10 @@ def setup(app: FastAPI, settings: Settings) -> None:
     Agent.instrument_all(instrument=InstrumentationSettings(include_content=False, include_binary_content=False))
 {%- endif %}
 
-    logger.info(f'Tracing enabled and exporting to {endpoint}')
+    endpoint_url = endpoint.encoded_string()
+    logger.info(
+        'Tracing enabled and exporting to %s',
+        endpoint_url,
+        extra={'extra': {'endpoint': endpoint_url}},
+    )
 {%- endif %}

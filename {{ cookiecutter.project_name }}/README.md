@@ -21,6 +21,28 @@ After start, API docs are available at:
 - http://localhost:8000/docs - Interactive Swagger UI
 - http://localhost:8000/redoc - ReDoc documentation
 
+{%- if cookiecutter.use_otel_observability == "yes" %}
+### Logging
+
+Use the standard-library logger and pass structured context through the nested `extra` field:
+
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+logger.info(
+    'Request completed',
+    extra={'extra': {'request_id': request_id, 'status_code': 200}},
+)
+```
+
+`LOG_FORMAT=json` emits the context as flat JSON fields. Use `LOG_FORMAT=stdout` for colorized
+text output.
+
+When tracing is enabled, set `OBSERVABILITY_TRACING_OTLP_ENDPOINT` to a valid OTLP URL
+(`http://`, `https://`, `grpc://`, or `grpcs://`).
+
+{% endif %}
 ### Before PR:
 
 1. Run linter using `make lint`
